@@ -1,0 +1,41 @@
+@import '../../../styles/colors.scss';
+
+.bill-list-container{
+  .main-content{
+    .header-wrapper{
+      margin: 0px 15px;
+
+      .bill-details{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      
+      .filters-wrapper{
+        margin: 20px 0px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .MuiButtonBase-root{
+          padding: 15px 50px;
+          background: $primary-color;
+          color: $contrast-color;
+        }
+        .filter-option{
+          margin-right: 20px;
+          width: 200px;
+        }
+      }
+    }
+  }
+  .bill-list{
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+  }
+  .empty-state-wrapper{
+    height: calc(100vh - 200px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
