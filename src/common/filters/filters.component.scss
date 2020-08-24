@@ -1,0 +1,23 @@
+@import '../../styles/colors.scss';
+@import '../../styles/sizes.scss';
+
+.filters-wrapper {
+  position: fixed;
+  height: calc(100vh - #{$header-height});
+  width: 200px;
+  left: 0;
+  top: $header-height;
+  background: $contrast-color;
+  padding: 5px 10px;
+  box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 2px 1px -1px rgba(0,0,0,0.12);
+
+  .filter-section{
+    height: 50%;
+    overflow-y: auto;
+
+    .filter-heading{
+      font-weight: 500;
+      text-transform: capitalize;
+    }
+  }
+}

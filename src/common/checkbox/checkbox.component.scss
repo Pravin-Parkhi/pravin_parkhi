@@ -1,0 +1,27 @@
+.checkbox-wrapper {
+    display: flex;
+    padding: 5px 0px;
+    margin-bottom: 15px;
+    align-items: center;
+
+    .filter-icon{
+      width: 14px;
+      height: 14px;
+      display: inline-block;
+      border: 1px solid #007dcc;
+    }
+
+    .filter-name{
+      font-size: 14px;
+      color: black;
+      margin-left: 10px;
+    }
+
+    .selected{
+      background-color: #007dcc;
+    }
+
+    .unselected{
+      border: 1px solid #007dcc;
+    }
+  }

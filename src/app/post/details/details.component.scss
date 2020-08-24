@@ -1,5 +1,12 @@
 .post-details-container{
-  height: calc(100vh - 130px);
-  overflow-y: auto;
-
+  .main-content-wrapper{
+    .related-post-list{
+      margin-top: 20px;
+      .section-heading{
+        font-size: 16px;
+        font-weight: 500;
+      }
+    }
+  }
+  
 }

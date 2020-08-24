@@ -1,0 +1,13 @@
+import { zipObject } from 'lodash'
+
+const ACTION_TYPES = [
+    'GET_BLOG_CATEGORY_LIST',
+    'GET_BLOG_CATEGORY_LIST_SUCCESS',
+    'GET_BLOG_CATEGORY_LIST_FAILURE',
+
+    'GET_BLOG_TAG_LIST',
+    'GET_BLOG_TAG_LIST_SUCCESS',
+    'GET_BLOG_TAG_LIST_FAILURE'
+]
+
+export default zipObject(ACTION_TYPES, ACTION_TYPES)

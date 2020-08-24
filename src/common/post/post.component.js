@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import moment from 'moment'
 
 import { Link } from "react-router-dom";
@@ -8,7 +8,7 @@ import { IoMdTime } from 'react-icons/io';
 import './post.component.scss'
 
 export default function Post (props) {
-  const { data } = props
+  const { data, showFullPost } = props
   const { ID, title, post_thumbnail, categories, date, author, content, tags } = data
 
   const categoriesList = Object.keys(categories).map((category) => {
@@ -22,8 +22,12 @@ export default function Post (props) {
     )
   })
 
-  const postContentBrief = new DOMParser().parseFromString(content, 'text/html')
-
+  const getPostContent = () => {
+    const postContentBrief = new DOMParser().parseFromString(content, 'text/html')
+    const contentToShow = postContentBrief.querySelector('p').textContent
+    return contentToShow
+  }
+  
   return (
     <div className='post-wrapper'>
       <img
@@ -43,7 +47,9 @@ export default function Post (props) {
           <span>{author.name}</span>
         </p>
       </div>
-      <p className='post-content'>{postContentBrief.querySelector('p').textContent}</p>
+      {showFullPost ? 
+        <p className='post-content' dangerouslySetInnerHTML={{__html: content}}></p> 
+          : <p className='post-content'>{getPostContent()}</p>}
       <p className='read-more-link'>
         <Link to={`/post-list/${ID}/details`}>Continue Reading</Link>
       </p>

@@ -29,6 +29,50 @@ const appReducer = (state = defaultState, action) => {
       }
     }
 
+    // Get site post details
+    case ActionType.GET_POST_DETAILS: {
+      return {
+        ...state,
+        isLoading: true
+      }
+    }
+    case ActionType.GET_POST_DETAILS_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false,
+        postDetails: action.response
+      }
+    }
+    case ActionType.GET_POST_DETAILS_FAILURE: {
+      return {
+        ...state,
+        isLoading: false,
+        getPostDetailsFailure: action.response
+      }
+    }
+
+    // Get related post list
+    case ActionType.GET_RELATED_POST_LIST: {
+      return {
+        ...state,
+        isLoading: true
+      }
+    }
+    case ActionType.GET_RELATED_POST_LIST_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false,
+        relatedPostList: action.response
+      }
+    }
+    case ActionType.GET_RELATED_POST_LIST_FAILURE: {
+      return {
+        ...state,
+        isLoading: false,
+        getRelatedPostListFailure: action.response
+      }
+    }
+
     default:
       return state
   }

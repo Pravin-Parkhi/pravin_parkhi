@@ -1,7 +1,7 @@
 import ActionTypes from './post.action-type'
 import { apiAction } from '../../api/api.action-creator'
 
-// GET POT LIST
+// GET POST LIST
 export const getPostList = (params) => {
     return apiAction({
       method: 'GET',
@@ -23,4 +23,52 @@ export const getPostListFailure = (response) => {
       type: ActionTypes.GET_POST_LIST_FAILURE,
       response
     }
+}
+
+// GET POST DETAILS
+export const getPostDetails = (params) => {
+  return apiAction({
+    method: 'GET',
+    url: 'getPostDetails',
+    onSuccess: getPostDetailsSuccess,
+    onFailure: getPostDetailsFailure,
+    label: ActionTypes.GET_POST_DETAILS,
+    queryParams: params.queryParams
+  })
+}
+export const getPostDetailsSuccess = (response) => {
+  return {
+      type: ActionTypes.GET_POST_DETAILS_SUCCESS,
+      response
+  }
+}
+export const getPostDetailsFailure = (response) => {
+  return {
+    type: ActionTypes.GET_POST_DETAILS_FAILURE,
+    response
+  }
+}
+
+// GET RELATED POST LIST
+export const getRelatedPostList = (params) => {
+  return apiAction({
+    method: 'GET',
+    url: 'getRelatedPostList',
+    onSuccess: getRelatedPostListSuccess,
+    onFailure: getRelatedPostListFailure,
+    label: ActionTypes.GET_RELATED_POST_LIST,
+    queryParams: params.queryParams
+  })
+}
+export const getRelatedPostListSuccess = (response) => {
+  return {
+      type: ActionTypes.GET_RELATED_POST_LIST_SUCCESS,
+      response
+  }
+}
+export const getRelatedPostListFailure = (response) => {
+  return {
+    type: ActionTypes.GET_RELATED_POST_LIST_FAILURE,
+    response
+  }
 }
