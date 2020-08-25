@@ -18,7 +18,8 @@ const appReducer = (state = defaultState, action) => {
       return {
         ...state,
         isLoading: false,
-        postList: action.response.posts
+        totalPosts: action.response.found,
+        postList: [...state.postList, ...action.response.posts]
       }
     }
     case ActionType.GET_POST_LIST_FAILURE: {
