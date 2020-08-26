@@ -4,8 +4,10 @@ import moment from 'moment'
 import { Link } from "react-router-dom";
 import { FiUser } from 'react-icons/fi';
 import { IoMdTime } from 'react-icons/io';
+import { CgArrowLongRight } from 'react-icons/cg';
 
 import './post.component.scss'
+import { IconContext } from 'react-icons';
 
 export default function Post (props) {
   const { data, showFullPost } = props
@@ -38,20 +40,29 @@ export default function Post (props) {
       <h3 className='title' dangerouslySetInnerHTML={{ __html: title }}></h3>
       <div className='category-list'>{categoriesList}</div>
       <div className='post-meta'>
-        <p className='time'>
-          <IoMdTime />
+        <div className='time'>
+          <IconContext.Provider value={{style: { color: '#767676' }}}>
+            <IoMdTime />
+          </IconContext.Provider>
           <span>{moment(date).fromNow()}</span>
-        </p>
-        <p className='author'>
-          <FiUser />
+        </div>
+        <div className='author'>
+          <IconContext.Provider value={{style: { color: '#767676' }}}>
+            <FiUser />
+          </IconContext.Provider>
           <span>{author.name}</span>
-        </p>
+        </div>
       </div>
       {showFullPost ? 
         <p className='post-content' dangerouslySetInnerHTML={{__html: content}}></p> 
           : <p className='post-content'>{getPostContent()}</p>}
       <p className='read-more-link'>
-        <Link to={`/post-list/${ID}/details`}>Continue Reading</Link>
+        <Link to={`/post-list/${ID}/details`}>
+          <span>Continue Reading</span>
+          <IconContext.Provider value={{style: { marginBottom: '-4px', marginLeft: 5 }}}>
+            <CgArrowLongRight />
+          </IconContext.Provider>
+        </Link>
       </p>
       <div className='tag-list'>{tagList}</div>
     </div>

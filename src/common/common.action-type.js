@@ -1,6 +1,8 @@
 import { zipObject } from 'lodash'
 
 const ACTION_TYPES = [
+    'TOGGLE_FILTERS',
+    
     'GET_BLOG_CATEGORY_LIST',
     'GET_BLOG_CATEGORY_LIST_SUCCESS',
     'GET_BLOG_CATEGORY_LIST_FAILURE',

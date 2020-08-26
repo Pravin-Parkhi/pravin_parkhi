@@ -1,6 +1,12 @@
 import ActionTypes from './common.action-type'
 import { apiAction } from '../api/api.action-creator'
 
+export const toggleFilters = () => {
+  return {
+    type: ActionTypes.TOGGLE_FILTERS
+  }
+}
+
 // GET BLOG CATEGORY LIST
 export const getBlogCategoryList = (params) => {
     return apiAction({

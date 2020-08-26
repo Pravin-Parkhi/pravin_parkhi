@@ -4,11 +4,11 @@
 .filters-wrapper {
   position: fixed;
   height: calc(100vh - #{$header-height});
-  width: 200px;
   left: 0;
   top: $header-height;
+  box-sizing: border-box;
   background: $contrast-color;
-  padding: 5px 10px;
+  transition: width 0.3s ease 0s;
   box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 2px 1px -1px rgba(0,0,0,0.12);
 
   .filter-section{
@@ -17,7 +17,12 @@
 
     .filter-heading{
       font-weight: 500;
+      overflow: hidden;
+      white-space: nowrap;
       text-transform: capitalize;
+    }
+    .filters-list{
+      margin-left: 20px;
     }
   }
 }

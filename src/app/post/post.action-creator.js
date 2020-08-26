@@ -26,7 +26,7 @@ export const getPostListFailure = (response) => {
 }
 
 // LOAD MORE POST
-export const loadMorePosts = () => {
+export const loadMorePosts = (params) => {
   return apiAction({
     method: 'GET',
     url: 'getPostList',

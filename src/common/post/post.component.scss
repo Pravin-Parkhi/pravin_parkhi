@@ -1,18 +1,22 @@
 .post-wrapper{
     margin-bottom: 20px;
     .post-thumbnail{
-        height: 300px;
-        width: 600px;   
+        height: auto;
+        width: 100%;
     }
     .title{
-        font-size: 28px;
-        margin: 5px auto;
+        font-size: 20px;
+        margin: 10px auto;
+        line-height: 28px;
         text-transform: uppercase;
+        @media only screen and (min-width: 760px) {
+            font-size: 28px;
+        }
     }
     .category-list{
         display: flex;
         flex-wrap: wrap;
-        margin-bottom: 10px;
+        margin: 10px auto;
         .category-name{
             padding: 4px 8px;
             margin: 4px 10px 4px 0px;
@@ -24,10 +28,11 @@
     .post-meta{
         display: flex;
         flex-wrap: wrap;
+        margin: 10px auto;
         .time{
             display: flex;
             align-items: center;
-            margin-top: 0px;
+            margin: 0px;
             span{
                 color: #767676;
                 font-size: 12px;
@@ -40,7 +45,7 @@
             display: flex;
             margin-left: 5px;
             align-items: center;
-            margin-top: 0px;
+            margin: 0px;
             span{
                 color: #767676;
                 font-size: 12px;
@@ -50,10 +55,13 @@
         }
     }
     .post-content{
-        font-size: 18px;
+        font-size: 16px;
         line-height: 1.8;
         color: #2b2b2b;
         margin: 5px 0px;
+        @media only screen and (min-width: 760px) {
+            font-size: 18px;
+        }
     }
     .read-more-link{
         text-align: right;

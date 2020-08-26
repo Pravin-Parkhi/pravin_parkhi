@@ -1,6 +1,7 @@
 import ActionType from './common.action-type'
 
 const defaultState = {
+  showFilters: false, 
   blogTagList: [],
   blogCategoryList: []
 };
@@ -8,6 +9,13 @@ const defaultState = {
 const appReducer = (state = defaultState, action) => {
   switch (action.type) {
     
+    case ActionType.TOGGLE_FILTERS: {
+      return {
+        ...state,
+        showFilters: !state.showFilters
+      }
+    }
+
     // Get blog category list
     case ActionType.GET_BLOG_CATEGORY_LIST: {
       return {

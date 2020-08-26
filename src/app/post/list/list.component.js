@@ -138,6 +138,7 @@ function PostList (props) {
       <div className='main-content'>
         <>
           <Filters
+            {...props}
             tagFilters={tagFilters}
             categoryFilters={categoryFilters}
             onCategoryChangeCallback={(filter)=> handleCategoryChange(filter)}
@@ -189,6 +190,7 @@ function mapStateToProps (state) {
     postList: state.post.postList,
     tagList: state.common.blogTagList,
     totalPosts: state.post.totalPosts,
+    showFilters: state.common.showFilters,
     categoryList: state.common.blogCategoryList
   }
 }
