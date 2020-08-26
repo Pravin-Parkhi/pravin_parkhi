@@ -9,6 +9,7 @@ import Post from '../../../common/post/post.component'
 import Loader from '../../../common/loader/loader.component'
 import Filters from '../../../common/filters/filters.component'
 import emptyStateGif from '../../../assets/images/empty-state.gif'
+import ButtonLoader from '../../../common/button-loader/button-loader.component'
 
 import './list.component.scss'
 
@@ -17,6 +18,7 @@ function PostList (props) {
   let [ tagFilters, setTagFilter ] = useState([])
   let [ currentPage, setCurrentPage ] = useState(1)
   let [ showLoader, setLoader ] = useState(false)
+  let [ showLoadMoreLoader, setLoadMoreLoader ] = useState(false)
 
   const { postList, tagList, categoryList } = props
   const { getPostList, getBlogTagList, getBlogCategoryList } = props
@@ -147,7 +149,9 @@ function PostList (props) {
           {renderPostList()}
         </>
         <div className='button-wrapper'>
-          <div className='load-more-button' onClick={handleLoadMoreClick}>Load More</div>
+          {showLoadMoreLoader ? 
+            <ButtonLoader /> 
+            : <div className='load-more-button' onClick={handleLoadMoreClick}>Load More</div>}
         </div>
       </div>
     )
@@ -174,9 +178,16 @@ function PostList (props) {
 
   useEffect(()=> {
     if(categoryFilters.length && tagFilters.length){
+      setLoadMoreLoader(true)
       fetchPostList()
     }
   }, [currentPage])
+
+  useEffect(()=> {
+    
+      setLoadMoreLoader(false) 
+    
+  }, [postList])
 
   return (
     <div className='post-list-container'>
