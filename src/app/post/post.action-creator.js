@@ -25,6 +25,30 @@ export const getPostListFailure = (response) => {
     }
 }
 
+// LOAD MORE POST
+export const loadMorePosts = () => {
+  return apiAction({
+    method: 'GET',
+    url: 'getPostList',
+    onSuccess: loadMorePostListSuccess,
+    onFailure: loadMorePostListFailure,
+    label: ActionTypes.lOAD_MORE_POST_LIST,
+    queryParams: params.queryParams
+  })
+}
+export const loadMorePostListSuccess = (response) => {
+  return {
+      type: ActionTypes.lOAD_MORE_POST_LIST_SUCCESS,
+      response
+  }
+}
+export const loadMorePostListFailure = (response) => {
+  return {
+    type: ActionTypes.lOAD_MORE_POST_LIST_FAILURE,
+    response
+  }
+}
+
 // GET POST DETAILS
 export const getPostDetails = (params) => {
   return apiAction({

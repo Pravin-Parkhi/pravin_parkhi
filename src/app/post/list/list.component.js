@@ -21,12 +21,12 @@ function PostList (props) {
   const { postList, tagList, categoryList } = props
   const { getPostList, getBlogTagList, getBlogCategoryList } = props
 
-  const fetchPostList = () => {
+  const fetchPostList = (initialPage) => {
     getPostList({
       queryParams: {
         siteId: SITE_ID,
         number: 25,
-        page: currentPage,
+        page: initialPage || currentPage,
         tag: getSelectedTags().length ? getSelectedTags() : undefined,
         category: getSelectedCategories().length ? getSelectedCategories() : undefined
       }
@@ -64,7 +64,6 @@ function PostList (props) {
     }
     setCategoryFilter(categoryFiltersCopy)
   }
-  console.log(postList)
 
   const handleTagChange = (tag) => {
     let tagFiltersCopy = deepCopy(tagFilters)
@@ -168,9 +167,15 @@ function PostList (props) {
 
   useEffect(()=> {
     if(categoryFilters.length && tagFilters.length){
+      fetchPostList(1)
+    }
+  }, [categoryFilters, tagFilters])
+
+  useEffect(()=> {
+    if(categoryFilters.length && tagFilters.length){
       fetchPostList()
     }
-  }, [categoryFilters, tagFilters, currentPage])
+  }, [currentPage])
 
   return (
     <div className='post-list-container'>

@@ -30,6 +30,29 @@ const appReducer = (state = defaultState, action) => {
       }
     }
 
+    // Get site posts
+    case ActionType.lOAD_MORE_POST_LIST: {
+      return {
+        ...state,
+        isLoading: true
+      }
+    }
+    case ActionType.lOAD_MORE_POST_LIST_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false,
+        totalPosts: action.response.found,
+        postList: action.response.posts
+      }
+    }
+    case ActionType.lOAD_MORE_POST_LIST_FAILURE: {
+      return {
+        ...state,
+        isLoading: false,
+        loadMorePostListFailure: action.response
+      }
+    }
+
     // Get site post details
     case ActionType.GET_POST_DETAILS: {
       return {
