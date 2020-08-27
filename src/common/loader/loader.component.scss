@@ -3,7 +3,6 @@ $blue: #0057e7;
 $red: #d62d20;
 $yellow: #ffa700;
 $white: #eee;
-
 $width: 60px;
 
 .loader {
@@ -77,6 +76,8 @@ $width: 60px;
 
 .showbox {
   width: 100%;
-  height: calc(100vh - 200px);
+  height: 100vh;
   display: flex;
+  z-index: 100;
+  overflow: hidden;
 }

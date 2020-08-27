@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import React, { useState, useEffect } from 'react'
-import { getPostList } from '../post.action-creator'
+import { getPostList, loadMorePosts } from '../post.action-creator'
 import { SITE_ID } from '../../../constants/variables'
 import { deepCopy } from '../../../utils/object.utils'
 import { getBlogCategoryList, getBlogTagList } from '../../../common/common.action-creator'
@@ -9,26 +9,40 @@ import Post from '../../../common/post/post.component'
 import Loader from '../../../common/loader/loader.component'
 import Filters from '../../../common/filters/filters.component'
 import emptyStateGif from '../../../assets/images/empty-state.gif'
+import useWindowDimensions from '../../../hooks/useWindowDimensions'
 import ButtonLoader from '../../../common/button-loader/button-loader.component'
 
 import './list.component.scss'
 
 function PostList (props) {
+  const { width } = useWindowDimensions()
+  const isMobileView = width<768
   let [ categoryFilters, setCategoryFilter ] = useState([])
   let [ tagFilters, setTagFilter ] = useState([])
   let [ currentPage, setCurrentPage ] = useState(1)
-  let [ showLoader, setLoader ] = useState(false)
   let [ showLoadMoreLoader, setLoadMoreLoader ] = useState(false)
 
-  const { postList, tagList, categoryList } = props
-  const { getPostList, getBlogTagList, getBlogCategoryList } = props
+  const { postList, tagList, categoryList, isLoading } = props
+  const { getPostList, getBlogTagList, loadMorePosts, getBlogCategoryList } = props
 
+  const fetchMorePostList = () => {
+    loadMorePosts({
+      queryParams: {
+        siteId: SITE_ID,
+        number: 25,
+        page: currentPage,
+        tag: getSelectedTags().length ? getSelectedTags() : undefined,
+        category: getSelectedCategories().length ? getSelectedCategories() : undefined
+      }
+    })
+  }
+  
   const fetchPostList = (initialPage) => {
     getPostList({
       queryParams: {
         siteId: SITE_ID,
         number: 25,
-        page: initialPage || currentPage,
+        page: 1,
         tag: getSelectedTags().length ? getSelectedTags() : undefined,
         category: getSelectedCategories().length ? getSelectedCategories() : undefined
       }
@@ -118,7 +132,7 @@ function PostList (props) {
   const renderPostList = () => {  
     if(postList && postList.length){
       return(
-        <div className='post-list'>
+        <div className='post-list' style={{paddingLeft: isMobileView ? '0px' : '300px'}}>
           {postList.map(post => <Post key={post.ID} data={post} showFullPost={false} />)}
         </div>
       )
@@ -142,17 +156,18 @@ function PostList (props) {
           <Filters
             {...props}
             tagFilters={tagFilters}
+            isMobileView={isMobileView}
             categoryFilters={categoryFilters}
             onCategoryChangeCallback={(filter)=> handleCategoryChange(filter)}
             onTagChangeCallback={(filter)=> handleTagChange(filter)}
           />
           {renderPostList()}
         </>
-        <div className='button-wrapper'>
+        {postList.length ? <div className='button-wrapper' style={{paddingLeft: isMobileView ? '0px' : '300px'}}>
           {showLoadMoreLoader ? 
             <ButtonLoader /> 
             : <div className='load-more-button' onClick={handleLoadMoreClick}>Load More</div>}
-        </div>
+        </div> : null}
       </div>
     )
   }
@@ -172,32 +187,33 @@ function PostList (props) {
 
   useEffect(()=> {
     if(categoryFilters.length && tagFilters.length){
-      fetchPostList(1)
+      fetchPostList()
     }
   }, [categoryFilters, tagFilters])
 
   useEffect(()=> {
     if(categoryFilters.length && tagFilters.length){
       setLoadMoreLoader(true)
-      fetchPostList()
+      fetchMorePostList()
     }
   }, [currentPage])
 
   useEffect(()=> {
-    
-      setLoadMoreLoader(false) 
-    
+    if(showLoadMoreLoader){
+      setLoadMoreLoader(false)
+    }
   }, [postList])
 
   return (
     <div className='post-list-container'>
-      {showLoader ? <Loader /> : renderMainContent()}
+      {isLoading ? <Loader /> : renderMainContent()}
     </div>
   )
 }
 
 function mapStateToProps (state) {
   return {
+    isLoading: state.post.isLoading,
     postList: state.post.postList,
     tagList: state.common.blogTagList,
     totalPosts: state.post.totalPosts,
@@ -206,4 +222,4 @@ function mapStateToProps (state) {
   }
 }
 
-export default (connect(mapStateToProps, { getPostList, getBlogTagList, getBlogCategoryList })(PostList))
+export default (connect(mapStateToProps, { getPostList, getBlogTagList, loadMorePosts, getBlogCategoryList })(PostList))

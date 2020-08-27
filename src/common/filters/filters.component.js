@@ -4,17 +4,17 @@ import Checkbox from '../checkbox/checkbox.component'
 
 import './filters.component.scss'
 
-export default function Filters (props) {
 
-  const { tagFilters, showFilters, categoryFilters } = props
+export default function Filters (props) {
+  const { tagFilters, showFilters, categoryFilters, isMobileView } = props
   const { onCategoryChangeCallback, onTagChangeCallback } = props
 
   return (
     <div className='filters-wrapper' style={{
-      width: showFilters ? '300px' : '0px',
-      padding: showFilters ? '10px 20px' : '10px 0px'
+      width: (showFilters || !isMobileView) ? '300px' : '0px',
+      padding: (showFilters || !isMobileView) ? '10px 20px' : '10px 0px'
     }}>
-      <div className='filter-section' style={{display: showFilters ? 'block' : 'none'}}>
+      <div className='filter-section' style={{display: (showFilters || !isMobileView) ? 'block' : 'none'}}>
         <p className='filter-heading'>Filter by category</p>
         <div className='filters-list'>
           {categoryFilters && categoryFilters.map(category => <Checkbox 
@@ -24,7 +24,7 @@ export default function Filters (props) {
           />)}
         </div>
       </div>
-      <div className='filter-section' style={{display: showFilters ? 'block' : 'none'}}>
+      <div className='filter-section' style={{display: (showFilters || !isMobileView) ? 'block' : 'none'}}>
         <p className='filter-heading'>Filter by category</p>
         <div className='filters-list'>
           {tagFilters && tagFilters.map(tag => <Checkbox 

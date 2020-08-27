@@ -1,6 +1,7 @@
 import ActionType from './post.action-type'
 
 const defaultState = {
+  isLoading: true,
   postList: []
 };
 
@@ -19,7 +20,7 @@ const appReducer = (state = defaultState, action) => {
         ...state,
         isLoading: false,
         totalPosts: action.response.found,
-        postList: [...state.postList, ...action.response.posts]
+        postList: action.response.posts
       }
     }
     case ActionType.GET_POST_LIST_FAILURE: {
@@ -34,21 +35,18 @@ const appReducer = (state = defaultState, action) => {
     case ActionType.lOAD_MORE_POST_LIST: {
       return {
         ...state,
-        isLoading: true
       }
     }
     case ActionType.lOAD_MORE_POST_LIST_SUCCESS: {
       return {
         ...state,
-        isLoading: false,
         totalPosts: action.response.found,
-        postList: action.response.posts
+        postList: [...state.postList, ...action.response.posts]
       }
     }
     case ActionType.lOAD_MORE_POST_LIST_FAILURE: {
       return {
         ...state,
-        isLoading: false,
         loadMorePostListFailure: action.response
       }
     }
