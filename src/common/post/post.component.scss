@@ -1,4 +1,6 @@
 .post-wrapper{
+    width: 100%;
+    max-width: 700px;
     margin-bottom: 20px;
     .post-thumbnail{
         height: auto;
@@ -64,9 +66,17 @@
             font-size: 18px;
         }
 
-        figure{
-            img{
+        figure, p{
+            margin: 0px;
+            img, div{
                 width: 100%;
+                height: auto;
+
+                .instagram-media{
+                    width: initial !important;
+                    max-width: initial !important;
+                    min-width: initial !important;
+                }
             }
         }
     }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import moment from 'moment'
 
 import { Link } from "react-router-dom";
@@ -63,7 +63,7 @@ export default function Post (props) {
           <IconContext.Provider value={{style: { color: '#767676' }}}>
             <FiUser />
           </IconContext.Provider>
-          <span>{author.name}</span>
+          <span>{author ? author.name : 'Unknown'}</span>
         </div>
       </div>
       {showFullPost ? 

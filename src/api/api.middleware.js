@@ -2,7 +2,7 @@ import axios from 'axios'
 import ActionTypes from '../constants/action-type'
 import { apiStart, apiEnd } from '../api/api.action-creator'
 import { apis } from '../api/api.constants'
-import { snakeToCamel, camelToSnake } from '../utils/string.utils'
+import { camelToSnake } from '../utils/string.utils'
 import { transformObjectKeys, deepCopy } from '../utils/object.utils'
 import { regex } from '../utils/validation.utils'
 

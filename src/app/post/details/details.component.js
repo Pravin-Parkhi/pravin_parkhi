@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { SITE_ID } from '../../../constants/variables'
 import { getPostDetails, getRelatedPostList } from '../post.action-creator'
@@ -9,9 +9,7 @@ import Loader from '../../../common/loader/loader.component'
 import './details.component.scss'
 
 function PostDetails (props) {
-  const [ showLoader, setLoader ] = useState(false)
-
-  const { getPostDetails, getRelatedPostList, postDetails, match} = props
+  const { getPostDetails, getRelatedPostList, postDetails, match, isLoading} = props
 
   const fetchPostDetails = () => {
     const { postId } = match.params
@@ -36,27 +34,29 @@ function PostDetails (props) {
   const renderMainContent = () => {
     return (<div className='main-content-wrapper'>
       {postDetails && <Post data={postDetails} showFullPost={true} />}
-      {/* <div className='related-post-list'>
+      <div className='related-post-list'>
         <p className='section-heading'>You might also like</p>
         <div className='list'></div>
-      </div> */}
+      </div>
     </div>)
   }
 
   useEffect(()=> {
     fetchPostDetails()
-    // fetchRelatedPostList()
+    fetchRelatedPostList()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
     <div className='post-details-container'>
-      {showLoader ? <Loader /> : renderMainContent()}
+      {isLoading ? <Loader /> : renderMainContent()}
     </div>
   )
 }
 
 function mapStateToProps (state) {
   return {
+    isLoading: state.post.isLoading,
     postDetails: state.post.postDetails
   }
 }

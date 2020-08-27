@@ -161,7 +161,7 @@ function PostList (props) {
             onCategoryChangeCallback={(filter)=> handleCategoryChange(filter)}
             onTagChangeCallback={(filter)=> handleTagChange(filter)}
           />
-          {renderPostList()}
+          {isLoading ? <Loader /> : renderPostList()}
         </>
         {postList.length ? <div className='button-wrapper' style={{paddingLeft: isMobileView ? '0px' : '300px'}}>
           {showLoadMoreLoader ? 
@@ -175,20 +175,24 @@ function PostList (props) {
   useEffect(()=> {
     fetchCategoryList()
     fetchTagList()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(()=> {
     constructCategoryFilters()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoryList])
 
   useEffect(()=> {
     constructTagFilters()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tagList])
 
   useEffect(()=> {
     if(categoryFilters.length && tagFilters.length){
       fetchPostList()
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoryFilters, tagFilters])
 
   useEffect(()=> {
@@ -196,17 +200,19 @@ function PostList (props) {
       setLoadMoreLoader(true)
       fetchMorePostList()
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage])
 
   useEffect(()=> {
     if(showLoadMoreLoader){
       setLoadMoreLoader(false)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [postList])
 
   return (
     <div className='post-list-container'>
-      {isLoading ? <Loader /> : renderMainContent()}
+      {renderMainContent()}
     </div>
   )
 }
