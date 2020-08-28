@@ -12,6 +12,7 @@ import './header.component.scss'
 function Header (props) {
 
   const { toggleFilters } = props
+  console.log(props)
 
   const handleHamburgerClick = () => {
     toggleFilters()
@@ -27,4 +28,4 @@ function Header (props) {
   )
 }
 
-export default (connect(null, { toggleFilters })(Header))
+export default connect(null, { toggleFilters })(Header)

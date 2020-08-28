@@ -76,7 +76,7 @@ export const getPostDetailsFailure = (response) => {
 // GET RELATED POST LIST
 export const getRelatedPostList = (params) => {
   return apiAction({
-    method: 'GET',
+    method: 'POST',
     url: 'getRelatedPostList',
     onSuccess: getRelatedPostListSuccess,
     onFailure: getRelatedPostListFailure,
