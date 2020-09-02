@@ -6,8 +6,48 @@
     .related-post-list{
       margin-top: 20px;
       .section-heading{
-        font-size: 16px;
-        font-weight: 500;
+        font-size: 18px;
+        font-weight: 700;
+      }
+      .list{
+        display: block;
+        @media only screen and (min-width: 768px) {
+          display: flex;
+        }
+        .related-post-wrapper{
+          @media only screen and (min-width: 768px) {
+            width: calc(100%/3);
+            margin-right: 20px;
+
+            &:last-child{
+              margin: 0px;
+            }
+          }
+          margin-bottom: 30px;
+          .post-thumbnail{
+            height: 180px;
+            width: 100%;
+            max-width: 300px;
+            object-fit: cover;
+          }
+          .title{
+            max-width: 300px;
+            font-weight: 400;
+            font-size: 16px;
+            margin: 5px 0px;
+            color: #007dcc;
+            text-decoration: none;
+
+            &:hover{
+              cursor: pointer;
+            }
+          }
+          .date{
+            color: #767676;
+            font-size: 14px;
+            margin-top: 8px;
+          }
+        }
       }
     }
   }

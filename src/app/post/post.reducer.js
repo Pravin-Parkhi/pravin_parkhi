@@ -2,7 +2,8 @@ import ActionType from './post.action-type'
 
 const defaultState = {
   isLoading: true,
-  postList: []
+  postList: [],
+  relatedPostList: []
 };
 
 const appReducer = (state = defaultState, action) => {
@@ -31,7 +32,7 @@ const appReducer = (state = defaultState, action) => {
       }
     }
 
-    // Get site posts
+    // load more site posts
     case ActionType.lOAD_MORE_POST_LIST: {
       return {
         ...state,
@@ -84,7 +85,7 @@ const appReducer = (state = defaultState, action) => {
       return {
         ...state,
         isLoading: false,
-        relatedPostList: action.response
+        relatedPostList: action.response.posts
       }
     }
     case ActionType.GET_RELATED_POST_LIST_FAILURE: {
