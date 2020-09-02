@@ -31,7 +31,6 @@ app.post("/related-posts/", async (req, res) => {
       if (!error && response.statusCode === 200) {
         const parsedResponse = JSON.parse(body)
         const posts = parsedResponse.hits
-        console.log(posts)
         return Promise.all(getConstructedUrls(posts)).then(function (responses) {
           return Promise.all(responses.map(function (response) {
             return response.json();
