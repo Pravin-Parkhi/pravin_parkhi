@@ -41,15 +41,19 @@ function jsonToQueryString (queryParams) {
   return ''
 }
 
-function getRequestURL (url, queryParams) {
-  let requestUrl = `${baseURL}${apis[url]}`
-  if (queryParams && Object.keys(queryParams).length) {
-    requestUrl = replaceEmbeddedUrlParam(requestUrl, queryParams)
-    const snakeCaseParams = transformObjectKeys(queryParams, camelToSnake)
-    requestUrl += jsonToQueryString(snakeCaseParams)
+function getRequestURL (url, queryParams, method) {
+  if(method === 'GET'){
+    let requestUrl = `${baseURL}${apis[url]}`
+    if (queryParams && Object.keys(queryParams).length) {
+      requestUrl = replaceEmbeddedUrlParam(requestUrl, queryParams)
+      const snakeCaseParams = transformObjectKeys(queryParams, camelToSnake)
+      requestUrl += jsonToQueryString(snakeCaseParams)
+    }
+  
+    return requestUrl
+  } else {
+    return `http://localhost:3000/${apis[url]}`
   }
-
-  return requestUrl
 }
 
 const apiMiddleware = ({ dispatch }) => next => action => {
@@ -78,7 +82,7 @@ const apiMiddleware = ({ dispatch }) => next => action => {
   }
 
   const queryParamsCopy = deepCopy(queryParams)
-  const requestURL = getRequestURL(url, queryParamsCopy)
+  const requestURL = getRequestURL(url, queryParamsCopy, method)
 
   // Change object keys casing
   body = transformObjectKeys(body, camelToSnake)

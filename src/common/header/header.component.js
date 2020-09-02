@@ -12,7 +12,6 @@ import './header.component.scss'
 function Header (props) {
 
   const { toggleFilters } = props
-  console.log(props)
 
   const handleHamburgerClick = () => {
     toggleFilters()

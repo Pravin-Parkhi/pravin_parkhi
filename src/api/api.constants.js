@@ -5,7 +5,7 @@ export const apis = {
   // posts
   getPostList: 'sites/{siteId}/posts/',
   getPostDetails: 'sites/{siteId}/posts/{postId}/',
-  getRelatedPostList: 'sites/{siteId}/posts/{postId}/related/',
+  getRelatedPostList: 'related-posts/',
 
   // common
   getBlogCategoryList: 'sites/{siteId}/categories/',
