@@ -44,8 +44,7 @@ function PostDetails (props) {
           alt='Post Thumbnail'
           className='post-thumbnail'
         />
-        <Link to={`/post-list/${post.ID}/details`}>{title}</Link>
-        {/* <h3 className='title' onClick={()=> handleClick(post)}>{title}</h3> */}
+        <Link className='title' to={`/post-list/${post.ID}/details`}>{title}</Link>
         <p className='date'>{moment(date).format('LL')}</p>
       </div>
     )

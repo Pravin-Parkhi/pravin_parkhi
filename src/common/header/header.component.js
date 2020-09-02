@@ -8,6 +8,7 @@ import { toggleFilters } from '../common.action-creator'
 import BrandLogo from '../../assets/images/brand-logo.png'
 
 import './header.component.scss'
+import { Link } from 'react-router-dom'
 
 function Header (props) {
 
@@ -22,7 +23,9 @@ function Header (props) {
       <IconContext.Provider value={{ className: 'hamburger-wrapper' }}>
         <GiHamburgerMenu onClick={handleHamburgerClick} />
       </IconContext.Provider>
-      <img src={BrandLogo} alt='Brand Logo' className='brand-logo' />
+      <Link to='/post-list'>
+        <img src={BrandLogo} alt='Brand Logo' className='brand-logo' />
+      </Link>
     </div>
   )
 }
